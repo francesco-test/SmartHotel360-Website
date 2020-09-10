@@ -84,3 +84,11 @@ jobs:
           # The content-type of the asset you want to upload. See the supported Media Types here: https://www.iana.org/assignments/media-types/media-types.xhtml for more information
           asset_content_type: application/zip
 
+      - name: Trigger Release in AzDO
+        uses: Azure/pipelines@v1
+        with:
+          azure-devops-project-url: 'https://dev.azure.com/dabenveg/BOC_Demo'
+          azure-pipeline-name: 'DockerCD' # name of the Azure pipeline to be triggered
+          azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
+
+
