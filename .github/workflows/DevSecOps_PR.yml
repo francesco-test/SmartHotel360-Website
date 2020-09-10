@@ -33,9 +33,6 @@ jobs:
   scan:
     
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: .
     
     steps:
     - name: SonarCloud Scan
@@ -45,7 +42,9 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
-          -Dproject.settings=./sonar-project.properties
+          -Dsonar.organization=n3wt0n
+          -Dsonar.projectKey=n3wt0n_SmartHotel360-Website
+          -Dsonar.sources=Source/
       
     - name: Check password
       uses: AlicanAkkus/pinder-action@1.0.0
