@@ -55,7 +55,7 @@ jobs:
           docker push $IMAGE_ID:$VERSION
       
       - name: Save Image as Tar
-        run: docker save --output $IMAGE_NAME.tar $IMAGE_ID:$VERSION
+        run: docker save --output $IMAGE_NAME.tar $IMAGE_NAME
       
       - name: Create a Release
         uses: actions/create-release@v1
