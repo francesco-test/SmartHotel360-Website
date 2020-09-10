@@ -33,6 +33,9 @@ jobs:
   scan:
     
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
     
     steps:
     - name: SonarCloud Scan
