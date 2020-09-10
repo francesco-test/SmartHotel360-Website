@@ -15,11 +15,12 @@ jobs:
   
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
-  push:
+  buildImage:
+    name: Build Docker Image
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: Source\SmartHotel360.Website
+        working-directory: Source/SmartHotel360.Website
 
     steps:
       - uses: actions/checkout@v2
