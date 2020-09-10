@@ -64,7 +64,7 @@ jobs:
           # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
           tag_name: $IMAGE_TAG
           # The name of the release. For example, `Release v1.0.1`
-          release_name: ${{ format('{0}_{1}', IMAGE_NAME, IMAGE_TAG }}
+          release_name: ${{ format('{0}_{1}', $IMAGE_NAME, $IMAGE_TAG }}
           draft: false
           prerelease: false
       
