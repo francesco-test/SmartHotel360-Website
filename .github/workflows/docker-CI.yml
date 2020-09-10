@@ -54,7 +54,7 @@ jobs:
           docker push $IMAGE_ID:$VERSION
       
       - name: Save Image as Tar
-        run: docker save --output ${{ format('{0}/{1}.tar', github.workspace, env.IMAGE_NAME) }} $IMAGE_NAME
+        run: docker save --output ${{ format('{0}/{1}.tar', github.workspace, env.IMAGE_NAME) }} $IMAGE_NAME:${{ github.run_id }}
       
       - name: Create a Release
         id: create_release
