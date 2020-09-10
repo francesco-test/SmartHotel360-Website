@@ -9,7 +9,6 @@ on:
 
 env:
   IMAGE_NAME: smarthotelwebimage
-  IMAGE_TAG: $GITHUB_RUN_ID 
 
 jobs:
   
@@ -58,14 +57,15 @@ jobs:
         run: docker save --output $IMAGE_NAME.tar $IMAGE_NAME
       
       - name: Create a Release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
-          tag_name: $IMAGE_TAG
+          tag_name: $GITHUB_RUN_ID
           # The name of the release. For example, `Release v1.0.1`
-          release_name: ${{ format('{0}_{1}', env.IMAGE_NAME, env.IMAGE_TAG) }}
+          release_name: ${{ format('{0}_{1}', env.IMAGE_NAME, github.run_id) }}
           draft: false
           prerelease: false
       
@@ -77,9 +77,9 @@ jobs:
           # The URL for uploading assets to the release
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           # The path to the asset you want to upload
-          asset_path: $IMAGE_NAME.tar
+          asset_path: ${{ format('{0}.{1}', env.IMAGE_NAME, 'tar') }}
           # The name of the asset you want to upload
-          asset_name: $IMAGE_NAME.tar
+          asset_name: ${{ format('{0}.{1}', env.IMAGE_NAME, 'tar') }}
           # The content-type of the asset you want to upload. See the supported Media Types here: https://www.iana.org/assignments/media-types/media-types.xhtml for more information
           asset_content_type: application/zip
 
