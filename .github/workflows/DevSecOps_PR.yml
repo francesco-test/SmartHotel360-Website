@@ -38,6 +38,8 @@ jobs:
         working-directory: Source
     
     steps:
+    - uses: actions/checkout@v2
+
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
@@ -47,8 +49,6 @@ jobs:
         args: >
           -Dsonar.organization=n3wt0n
           -Dsonar.projectKey=n3wt0n_SmartHotel360-Website
-          -Dsonar.sources=.
-          -Dsonar.projectBaseDir=${{ env.GITHUB_WORKSPACE }}
       
     - name: Check password
       uses: AlicanAkkus/pinder-action@1.0.0
