@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace SmartHotel360.PublicWeb
 {
@@ -13,6 +14,7 @@ namespace SmartHotel360.PublicWeb
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Security;
 
     public class PhotoUploader
     {
@@ -25,6 +27,29 @@ namespace SmartHotel360.PublicWeb
             _credentials = new StorageCredentials(name, constr);
             _storageAccount = new CloudStorageAccount(_credentials, useHttps: true);
             _blobClient = _storageAccount.CreateCloudBlobClient();
+        }
+
+        public void DoSomethingBad(HttpContext ctx)
+        {
+            //XML Injection vulnerability
+             using (XmlWriter writer = XmlWriter.Create("employees.xml"))
+            {
+                writer.WriteStartDocument();
+        
+                // BAD: Insert user input directly into XML
+                writer.WriteRaw("<employee><name>" + employeeName + "</name></employee>");
+        
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+            }
+
+            //Hardcoded pwd
+            string password = ctx.Request.QueryString["password"];
+ 
+            if (password == "myPa55word")
+            {
+                ctx.Response.Redirect("login");
+            }
         }
 
         public async Task<CloudBlockBlob> UploadPetPhoto(byte[] content)
