@@ -8,7 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Xml;
+using System.Security
+;
 namespace SmartHotel360.PublicWeb.Controllers
 {
 
@@ -28,6 +30,29 @@ namespace SmartHotel360.PublicWeb.Controllers
         public PetsApiController(IOptions<LocalSettings> settings)
         {
             _settings = settings.Value;
+        }
+
+        public void DoSomethingBad(HttpContext ctx)
+        {
+            //XML Injection vulnerability
+             using (XmlWriter writer = XmlWriter.Create("employees.xml"))
+            {
+                writer.WriteStartDocument();
+        
+                // BAD: Insert user input directly into XML
+                writer.WriteRaw("<employee><name>" + employeeName + "</name></employee>");
+        
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+            }
+
+            //Hardcoded pwd
+            string password = ctx.Request.QueryString["password"];
+ 
+            if (password == "myPa55word")
+            {
+                ctx.Response.Redirect("login");
+            }
         }
 
         [HttpPost]

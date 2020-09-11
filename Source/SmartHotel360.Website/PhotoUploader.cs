@@ -29,29 +29,6 @@ namespace SmartHotel360.PublicWeb
             _blobClient = _storageAccount.CreateCloudBlobClient();
         }
 
-        public void DoSomethingBad(HttpContext ctx)
-        {
-            //XML Injection vulnerability
-             using (XmlWriter writer = XmlWriter.Create("employees.xml"))
-            {
-                writer.WriteStartDocument();
-        
-                // BAD: Insert user input directly into XML
-                writer.WriteRaw("<employee><name>" + employeeName + "</name></employee>");
-        
-                writer.WriteEndElement();
-                writer.WriteEndDocument();
-            }
-
-            //Hardcoded pwd
-            string password = ctx.Request.QueryString["password"];
- 
-            if (password == "myPa55word")
-            {
-                ctx.Response.Redirect("login");
-            }
-        }
-
         public async Task<CloudBlockBlob> UploadPetPhoto(byte[] content)
         {
             var petsContainer = _blobClient.GetContainerReference("pets");
