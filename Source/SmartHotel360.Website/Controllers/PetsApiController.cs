@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Options;
@@ -9,8 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Security
-;
+using System.Security;
+using System.Web;
+
 namespace SmartHotel360.PublicWeb.Controllers
 {
 
@@ -32,7 +34,7 @@ namespace SmartHotel360.PublicWeb.Controllers
             _settings = settings.Value;
         }
 
-        public void DoSomethingBad(HttpContext ctx)
+        public void DoSomethingBad(HttpContext ctx, string employeeName)
         {
             //XML Injection vulnerability
              using (XmlWriter writer = XmlWriter.Create("employees.xml"))
@@ -47,7 +49,7 @@ namespace SmartHotel360.PublicWeb.Controllers
             }
 
             //Hardcoded pwd
-            string password = ctx.Request.QueryString["password"];
+            string password = ctx.Request.Query["password"];
  
             if (password == "myPa55word")
             {
