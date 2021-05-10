@@ -55,6 +55,27 @@
       "metadata": {
         "description": "The behavior of Azure runtime if container has stopped."
       }
+    },
+    "imageRegistryLoginServer": {
+      "type": "string",
+      "defaultValue": "myacr.azurecr.io",
+      "metadata": {
+        "description": "Azure Container Registry url"
+      }
+    },
+    "imageRegistryUsername": {
+      "type": "string",
+      "defaultValue": "myusername",
+      "metadata": {
+        "description": "Azure Container Registry username"
+      }
+    },
+    "imageRegistryPassword": {
+      "type": "string",
+      "defaultValue": "mypass",
+      "metadata": {
+        "description": "Azure Container Registry password"
+      }
     }
   },
   "resources": [
@@ -83,6 +104,13 @@
             }
           }
         ],
+        "imageRegistryCredentials": [
+          {
+            "server": "[parameters('imageRegistryLoginServer')]",
+            "username": "[parameters('imageRegistryUsername')]",
+            "password": "[parameters('imageRegistryPassword')]"
+          }
+        ]
         "osType": "Linux",
         "restartPolicy": "[parameters('restartPolicy')]",
         "ipAddress": {
