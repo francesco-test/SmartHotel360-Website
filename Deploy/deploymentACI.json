@@ -110,7 +110,7 @@
             "username": "[parameters('imageRegistryUsername')]",
             "password": "[parameters('imageRegistryPassword')]"
           }
-        ]
+        ],
         "osType": "Linux",
         "restartPolicy": "[parameters('restartPolicy')]",
         "ipAddress": {
