@@ -49,12 +49,12 @@ namespace SmartHotel360.PublicWeb.Controllers
             }
 
             //Hardcoded pwd
-            string password = ctx.Request.Query["password"];
+            //string password = ctx.Request.Query["password"];
  
-            if (password == "myPa55word")
-            {
-                ctx.Response.Redirect("login");
-            }
+            //if (password == "")
+            //{
+            //    ctx.Response.Redirect("login");
+            // }
         }
 
         [HttpPost]
