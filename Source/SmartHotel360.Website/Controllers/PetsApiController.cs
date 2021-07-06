@@ -42,7 +42,7 @@ namespace SmartHotel360.PublicWeb.Controllers
                 writer.WriteStartDocument();
         
                 // BAD: Insert user input directly into XML
-                writer.WriteRaw("<employee><name>" + employeeName + "</name></employee>");
+                // writer.WriteRaw("<employee><name>" + employeeName + "</name></employee>");
         
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
