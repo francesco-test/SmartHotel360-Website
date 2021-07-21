@@ -51,10 +51,10 @@ namespace SmartHotel360.PublicWeb.Controllers
             //Hardcoded pwd
             string password = ctx.Request.Query["password"];
  
-            if (password == "AAABBB")
-            {
-                ctx.Response.Redirect("login");
-            }
+            //if (password == "AAABBB")
+            //{
+            //    ctx.Response.Redirect("login");
+            //}
         }
 
         [HttpPost]
