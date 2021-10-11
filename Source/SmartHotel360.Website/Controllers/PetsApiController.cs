@@ -48,7 +48,7 @@ namespace SmartHotel360.PublicWeb.Controllers
                 //writer.WriteEndDocument();
             //}
 
-            //Hardcoded pwd
+            //Hardcoded pwd vuln
             string password = ctx.Request.Query["password"];
  
             if (password == "AAABBB")
