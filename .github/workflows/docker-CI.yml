@@ -101,7 +101,7 @@ jobs:
       - name: Trigger Release in AzDO
         uses: Azure/pipelines@v1
         with:
-          azure-devops-project-url: 'https://dev.azure.com/dabenveg/SmartHotel360'
+          azure-devops-project-url: 'https://dev.azure.com/fdeliva/SmartHotel360'
           azure-pipeline-name: 'DockerCD' # name of the Azure pipeline to be triggered
           azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
 
